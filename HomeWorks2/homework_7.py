@@ -7,15 +7,15 @@ def create_table():
         CREATE TABLE IF NOT EXISTS books (
             id INTEGER PRIMARY KEY,
             name TEXT,
-            author TEXT,
+            thor TEXT,
             publication_year INTEGER,
             genre TEXT,
             number_of_pages INTEGER,
             number_of_copies INTEGER
         )
     ''')
-    conn.commit()
-    conn.close()
+
+
 
 def insert_books():
     books_data = [
@@ -32,12 +32,13 @@ def insert_books():
     ]
     conn = sqlite3.connect('books.db')
     cursor = conn.cursor()
+    cursor.execute("DELETE FROM books")
     cursor.executemany('''
         INSERT INTO books (name, author, publication_year, genre, number_of_pages, number_of_copies)
         VALUES (?, ?, ?, ?, ?, ?)
     ''', books_data)
     conn.commit()
-    conn.close()
+
 
 def show_books():
     conn = sqlite3.connect('books.db')
