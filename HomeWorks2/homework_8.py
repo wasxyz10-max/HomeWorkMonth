@@ -1,5 +1,5 @@
 import sqlite3
-from pprint import pprint
+
 
 def create_table():
     conn = sqlite3.connect('books.db')
